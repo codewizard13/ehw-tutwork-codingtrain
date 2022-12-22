@@ -1,0 +1,136 @@
+<!-- 
+FILE: EH_CODE_2018.10.24_TutorialDemo_CodingTrain_JavaScriptVanilla_ReadTextFileCountWords_01.01.htm
+PROGRAMMER: Eric Hepperle
+DATE CREATED: 10/24/18
+DATE UPDATED: --
+
+Version: 1.01
+
+
+Doing JavaScript Word Counter Tutorial.
+
+This follow's Coding Train's tutorial from here: https://www.youtube.com/watch?v=unm0BLor8aE
+
+Description: Demonstrates how to load and parse a text file into lines
+with XMLHttpRequest().
+
+#GOTCHAS: 
+* Uses XMLHttpRequest to avoid having to use his proprietary P5.js library
+* Uses a global "data" object to be able to access the lines
+after the XMLHttpRequest exits.
+
+Could be useful for indexing books.
+
+
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>TutWork - Coding Challenge #40.1: Word Counter in JavaScript</title>
+    <style>
+ul {
+    list-style: none;
+}
+    </style>
+</head>
+<body>
+    <h1><a href="https://www.youtube.com/watch?v=unm0BLor8aE&t=486s" target="_blank">Coding Challenge #40.1: Word Counter in JavaScript | Coding Train</a></h1>
+    <h3>Version: 1.01</h3>
+    <div id="output"></div>
+    
+    
+    <script>
+
+        
+        /*
+            Reads and parses text file into array of lines
+            @params:
+            - f: file name to load.
+            - d: data object;
+        */
+        function loadTextFile(f, d) {
+            var data = d;
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function(){
+                if (this.readyState == 4 && this.status == 200) {
+                    //console.log(this.responseText);
+                    var lines = this.responseText.split('\n');
+                    //console.log(lines);
+                    if (data) {
+                        //console.log("DATA OBJECT EXISTS!");
+                        data.str = this.responseText;
+                        data.lines = lines;
+                        //console.log("%cdata: ","background:orange");
+                        //console.log(data);
+                    }
+                }
+            }
+        
+            xhttp.open("GET", f, true);
+            xhttp.send();        
+        }
+    
+        function init() {
+            // Create global data object
+            data = {}; // #GOTCHA - This did not work with 'var' directive
+
+            // get text file contents as one long string
+            loadTextFile("ebook-garden-god.txt", data);
+            var txt = data.str;
+            console.log(data[1]);
+/*                        
+            // split long string at spaces, punctuation (all non alphanumeric chars)
+            var tokens = txt.split(/\W+/);
+            console.log("%tokens: ","background:aliceblue");
+            
+            console.log(tokens);
+*/            
+        }
+        
+        window.onload = init;
+
+    </script>
+
+</body>
+
+<!--
+NOTES:
+
+    10/24/18 - Creates file.
+             -  Works!
+
+-->
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
