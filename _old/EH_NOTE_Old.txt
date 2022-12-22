@@ -1,0 +1,8 @@
+Eric Hepperle
+2022-12-22
+
+---
+
+OLD means stuff that is no longer current and thus broken. In this case,
+my XML file reader JavaScript script that reads ebook-garden-god.txt as a demo
+no longer works because of anti CORS browser measures.
